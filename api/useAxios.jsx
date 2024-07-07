@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://localhost:8000/api/';
+const baseURL = process.env.baseURL;
 
 export const ConnectAxios = axios.create({
     baseURL
