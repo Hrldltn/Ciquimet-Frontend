@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (data) => {
     setCargando(true);
     
-    const res = await authAxios.post('api/register/', data, {
+    const res = await authAxios.post('../api/register/', data, {
       headers: {
         'Content-Type': 'multipart/form-data',
         'Authorization': 'Bearer ' + localStorage.getItem('Ciquimet session')
