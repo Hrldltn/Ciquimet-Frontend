@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = process.env.baseURL;
+const baseURL = import.meta.env.baseURL;
 
 export const ConnectAxios = axios.create({
     baseURL
