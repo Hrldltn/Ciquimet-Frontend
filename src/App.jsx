@@ -13,7 +13,7 @@ function App() {
       <BrowserRouter>
         <AuthProvider>
           <Routes>
-            <Route path="/usuarios/" element={<Usuarios/>} />
+            <Route path="/admin/usuarios/" element={<Usuarios/>} />
             <Route path="/admin/*" element={<RutaProtegida/>}>
               <Route index element={<Navigate to="usuarios" />} />
             </Route>
