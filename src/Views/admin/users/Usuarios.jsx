@@ -23,14 +23,17 @@ const Usuarios = () => {
     
     const get_users_data = async () => {
         try {
+            // Llamar a la función que obtiene la lista de usuarios
             const response = await usersList();
-            console.log('Response:', response); // Log response for debugging
+            console.log('Response from usersList:', response);
     
             // Verificar que la respuesta tiene la estructura correcta
             if (response && Array.isArray(response.users)) {
                 const data = response.users;
+                console.log('Data from response:', data);
                 const now = new Date();
     
+                // Procesar los datos
                 setUsers(data);
                 const newUsers = data.filter(user => user.is_new_user && user.is_new_user.toLowerCase() === 'true').length;
                 const activeUsers = data.filter(user => {
@@ -42,6 +45,7 @@ const Usuarios = () => {
                 const porcentaje = (newUsers / totalUsers) * 100;
                 const porcentajeUser = (activeUsers / totalUsers) * 100;
     
+                // Actualizar el estado con los datos calculados
                 setCantidadUser(totalUsers);
                 setNewUsers(newUsers);
                 setPorcentajeUser(porcentaje);
@@ -54,6 +58,7 @@ const Usuarios = () => {
             console.error('Error al obtener los datos de los usuarios:', error);
         }
     };
+    
     
     
     const columns = [
