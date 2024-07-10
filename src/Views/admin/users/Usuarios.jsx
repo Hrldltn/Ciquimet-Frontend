@@ -22,30 +22,36 @@ const Usuarios = () => {
 
     
     const get_users_data = async () => {
-        const response = await usersList();
-        const data = response.users;
-        const now = new Date();
-  
-
-        if (Array.isArray(data)) {
-            setUsers(data);
-            const newUsers = data.filter(user => user.is_new_user && user.is_new_user.toLowerCase() === 'true').length;
-            const activeUsers = data.filter(user => {
-                const lastLoginDate = new Date(user.last_login);
-                const timeDiff = now - lastLoginDate;
-                return timeDiff <= 30 * 24 * 60 * 60 * 1000; // 30 días en milisegundos
-            }).length;
-            const totalUsers = data.length;
-            const porcentaje = (newUsers / totalUsers) * 100;
-            const porcentajeUser = (activeUsers/totalUsers) * 100;
-
-            setCantidadUser(totalUsers);
-            setNewUsers(newUsers);
-            setPorcentajeUser(porcentaje);
-            setPorcentajeTotal(porcentajeUser);
-            console.log(porcentajeUser)
-        } else {
-            console.error('Error en los datos:', data);
+        try {
+            const response = await usersList();
+            console.log('Response:', response); // Log response for debugging
+    
+            // Verificar que la respuesta tiene la estructura correcta
+            if (response && Array.isArray(response.users)) {
+                const data = response.users;
+                const now = new Date();
+    
+                setUsers(data);
+                const newUsers = data.filter(user => user.is_new_user && user.is_new_user.toLowerCase() === 'true').length;
+                const activeUsers = data.filter(user => {
+                    const lastLoginDate = new Date(user.last_login);
+                    const timeDiff = now - lastLoginDate;
+                    return timeDiff <= 30 * 24 * 60 * 60 * 1000; // 30 días en milisegundos
+                }).length;
+                const totalUsers = data.length;
+                const porcentaje = (newUsers / totalUsers) * 100;
+                const porcentajeUser = (activeUsers / totalUsers) * 100;
+    
+                setCantidadUser(totalUsers);
+                setNewUsers(newUsers);
+                setPorcentajeUser(porcentaje);
+                setPorcentajeTotal(porcentajeUser);
+                console.log('Porcentaje de Usuarios Activos:', porcentajeUser);
+            } else {
+                console.error('Error en los datos: estructura de datos incorrecta', response);
+            }
+        } catch (error) {
+            console.error('Error al obtener los datos de los usuarios:', error);
         }
     };
     
