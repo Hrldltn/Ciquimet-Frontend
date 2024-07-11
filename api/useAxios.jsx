@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const baseURL = import.meta.env.baseURL;
+const baseURL = 'https://ciquimet-backend.onrender.com/api/'
+console.log(baseURL);
 
 export const ConnectAxios = axios.create({
     baseURL

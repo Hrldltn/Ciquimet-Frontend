@@ -13,9 +13,9 @@ function App() {
       <BrowserRouter>
         <AuthProvider>
           <Routes>
-            <Route path="usuarios" element={<Usuarios/>} />
             <Route path="/admin/*" element={<RutaProtegida/>}>
               <Route index element={<Navigate to="usuarios" />} />
+              <Route path="usuarios" element={<Usuarios/>} />
             </Route>
             <Route path="/" element={<Login/>} />
           </Routes>
