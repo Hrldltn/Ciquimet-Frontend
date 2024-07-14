@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = import.meta.env.baseURL
+const baseURL = import.meta.env.BASE_URL
 
 export const ConnectAxios = axios.create({
     baseURL
